@@ -1,14 +1,18 @@
 #include <iostream>
-
-#include "model/person.h"
-#include "util/color.hpp"
-using namespace std;
+#include "model/Person.h"
+#include "module/Module.hpp"
+#include "module/ModuleManager.hpp"
+#include "service/CarProvideService.hpp"
 
 int main() {
+    auto manager = ModuleManager();
+
+    manager.addModule(new CarProvideService());
+
     const Person person("John", Person::USER);
 
     std::cout << "Person name: " << person.name << std::endl;
-    return 0;
+    manager.start();
 
-    // Return car who have biggest battery and don`t have current owner(not rented)
+    return 0;
 }

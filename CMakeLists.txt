@@ -7,4 +7,8 @@ add_executable(Car_server src/main.cpp
         src/util/color.hpp
         src/model/car.hpp
         src/model/person.h
+        src/module/Module.hpp
+        src/service/CarProvideService.hpp
+        src/module/ModuleManager.hpp
+        src/util/IdGenerator.hpp
 )
