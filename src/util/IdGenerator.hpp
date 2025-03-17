@@ -1,9 +1,9 @@
 #pragma once
 
 struct IdGenerator {
-    using Id = unsigned int;
-    static Id generate_id() noexcept {
-        static Id counter = 0;
+    using Id_type = unsigned int;
+    static Id_type generate_id() noexcept {
+        static Id_type counter = 0;
         return ++counter;
     }
 };
