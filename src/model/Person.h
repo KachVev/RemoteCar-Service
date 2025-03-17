@@ -1,7 +1,6 @@
 #pragma once
 
 #include <string>
-#include <utility>
 #include "../util/IdGenerator.hpp"
 
 struct Person {
@@ -11,11 +10,6 @@ struct Person {
     std::string name;
     Permission type;
 
-    explicit Person(std::string name, const Permission permission = USER) : id(IdGenerator::generate_id()), name(std::move(name)), type(permission) {}
+    explicit Person(std::string name, Permission permission = USER)
+        : id(IdGenerator::generate_id()), name(std::move(name)), type(permission) {}
 };
-
-
-
-
-
-

@@ -11,14 +11,12 @@ public:
     void start() const {
         for (const auto module : modules) {
             module->run();
-            std::cout << "Module " << module->name() << " started" << std::endl;
         }
     }
 
     void stop() const {
         for (const auto module : modules) {
             module->stop();
-            std::cout << "Module " << module->name() << " stopped" << std::endl;
         }
     }
 

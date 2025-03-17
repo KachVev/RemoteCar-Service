@@ -11,7 +11,7 @@ add_executable(Car_server src/main.cpp
         src/service/CarProvideService.hpp
         src/module/ModuleManager.hpp
         src/util/IdGenerator.hpp
+        src/service/WebSocketServerService.hpp
 )
 
-
-
+# Todo add websocket and json for parse connection

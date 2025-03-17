@@ -7,12 +7,10 @@
 int main() {
     auto manager = ModuleManager();
 
+    manager.addModule(new WebSocketServerService());
     manager.addModule(new CarProvideService());
-    const Person person("John", Person::USER);
 
-    std::cout << "Person name: " << person.name << std::endl;
     manager.start();
-
 
     return 0;
 }
