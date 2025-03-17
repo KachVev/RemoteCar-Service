@@ -1,7 +1,7 @@
 #pragma once
-#include <iostream>
 #include <vector>
-#include <algorithm>
+#include <iostream>
+
 #include "Module.hpp"
 
 class ModuleManager {
@@ -23,11 +23,13 @@ public:
     }
 
     void addModule(Module* module) {
+        module->setManager(this);
         modules.push_back(module);
     }
 
     void removeModule(Module* module) {
-        std::erase(modules, module); // FIXME
+        module->setManager(nullptr);
+        std::erase(modules, module);
     }
 
     template <typename T>
@@ -38,27 +40,5 @@ public:
             }
         }
         return nullptr;
-    }
-
-    template <typename T>
-    void startModule() {
-        for (auto module : modules) {
-            if (auto casted = dynamic_cast<T*>(module)) {
-                casted->run();
-                std::cout << "Module " << casted->name() << " started" << std::endl;
-                return;
-            }
-        }
-    }
-
-    template <typename T>
-    void stopModule() {
-        for (auto module : modules) {
-            if (auto casted = dynamic_cast<T*>(module)) {
-                casted->stop();
-                std::cout << "Module " << casted->name() << " stopped" << std::endl;
-                return;
-            }
-        }
     }
 };
