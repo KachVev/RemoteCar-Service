@@ -1,8 +1,7 @@
 #pragma once
-#include <string>
+#include <string_view>
 
 class ModuleManager;
-
 
 class Module {
 protected:
@@ -11,7 +10,7 @@ protected:
 public:
     virtual ~Module() = default;
 
-    [[nodiscard]] virtual std::string name() const = 0;
+    [[nodiscard]] virtual std::string_view name() const = 0;
     virtual void run() = 0;
     virtual void stop() = 0;
 

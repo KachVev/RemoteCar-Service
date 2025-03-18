@@ -4,13 +4,12 @@
 #include <string_view>
 #include <utility>
 
-#include "../module/Module.hpp"
 
 class WebSocketServerService final : public Module {
 public:
     using MessageCallback = std::function<void(void* ws, std::string_view message)>;
 
-    [[nodiscard]] std::string name() const override {
+    [[nodiscard]] std::string_view name() const override {
         return "WebSocketServerService";
     }
 

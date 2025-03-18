@@ -5,7 +5,6 @@
 #include <vector>
 
 #include "WebSocketServerService.hpp"
-#include "../module/Module.hpp"
 #include "../model/Car.hpp"
 
 class CarProvideService final : public Module {
@@ -27,7 +26,7 @@ class CarProvideService final : public Module {
     }
 
 public:
-    [[nodiscard]] std::string name() const override {
+    [[nodiscard]] std::string_view name() const override {
         return "CarProvideService";
     }
 

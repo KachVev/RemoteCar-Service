@@ -1,21 +1,22 @@
 #pragma once
+#include <algorithm>
 #include <vector>
 #include <iostream>
 
 #include "Module.hpp"
 
 class ModuleManager {
-    std::vector<Module*> modules{};
+    std::vector<Module*> modules;
 
 public:
     void start() const {
-        for (const auto module : modules) {
+        for (auto module : modules) {
             module->run();
         }
     }
 
     void stop() const {
-        for (const auto module : modules) {
+        for (auto module : modules) {
             module->stop();
         }
     }
@@ -26,8 +27,7 @@ public:
     }
 
     void removeModule(Module* module) {
-        module->setManager(nullptr);
-        std::erase(modules, module);
+        modules.erase(std::ranges::remove(modules, module).begin(), modules.end());
     }
 
     template <typename T>
@@ -38,5 +38,16 @@ public:
             }
         }
         return nullptr;
+    }
+
+    template <typename T>
+    std::vector<T*> getModules() {
+        std::vector<T*> result;
+        for (auto module : modules) {
+            if (auto casted = dynamic_cast<T*>(module)) {
+                result.push_back(casted);
+            }
+        }
+        return result;
     }
 };

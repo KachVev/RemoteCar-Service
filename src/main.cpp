@@ -1,7 +1,4 @@
-#include <iostream>
-#include "model/Person.h"
-#include "module/Module.hpp"
-#include "module/ModuleManager.hpp"
+#include "ModuleManager.hpp"
 #include "service/CarProvideService.hpp"
 
 int main() {

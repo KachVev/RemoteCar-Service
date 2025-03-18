@@ -10,6 +10,6 @@ struct Person {
     std::string name;
     Permission type;
 
-    explicit Person(std::string name, Permission permission = USER)
+    explicit Person(std::string name, const Permission permission = USER)
         : id(IdGenerator::generate_id()), name(std::move(name)), type(permission) {}
 };
