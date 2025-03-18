@@ -5,7 +5,7 @@
 #include <vector>
 
 #include "WebSocketServerService.hpp"
-#include "../model/Car.hpp"
+#include "../entity/Car.hpp"
 
 class CarProvideService final : public Module {
     std::vector<Car> cars;

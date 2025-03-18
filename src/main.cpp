@@ -1,13 +1,15 @@
-#include "ModuleManager.hpp"
-#include "service/CarProvideService.hpp"
+#include <iostream>
+#include <nlohmann/json.hpp>
+
+using json = nlohmann::json;
 
 int main() {
-    auto manager = ModuleManager();
+    json j;
+    j["username"] = "Steve";
+    j["level"] = 42;
+    j["inventory"] = { "pickaxe", "sword", "shield" };
 
-    manager.addModule(new WebSocketServerService());
-    manager.addModule(new CarProvideService());
-
-    manager.start();
+    std::cout << j.dump(4) << std::endl;
 
     return 0;
 }

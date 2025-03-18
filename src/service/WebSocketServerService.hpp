@@ -1,9 +1,12 @@
 #pragma once
+
 #include <functional>
 #include <unordered_map>
+#include <string>
 #include <string_view>
+#include <iostream>
 #include <utility>
-
+#include "Module.hpp"
 
 class WebSocketServerService final : public Module {
 public:
