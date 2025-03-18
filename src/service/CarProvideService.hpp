@@ -32,9 +32,6 @@ public:
 
     void run() override {
         const auto websocket = manager ? manager->getModule<WebSocketServerService>() : nullptr;
-        if (!websocket) {
-            return;
-        }
         websocket->registerHandler("/connect", [this](auto *ws, std::string_view message) {
             // Parse message as json and create car
         });
