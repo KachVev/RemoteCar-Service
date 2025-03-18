@@ -37,20 +37,15 @@ Develop a server for:
 
 ### **Core Features**
 - [ ] Implement user authentication and profile management.
-- [ ] Develop the car rental system.
+- [x] Develop the car rental system.
 - [ ] Establish WebSocket communication for real-time control.
 - [ ] Implement live video streaming from cars.
-- [ ] Design an admin panel for car management.
+- [ ] Design an admin panel for car management(Return data to client for display).
 
 ### **Hardware Integration**
 - [ ] Connect ESP32 to control cars.
 - [ ] Implement battery level monitoring.
-- [ ] Develop a charging station system.
-
-### **Future Enhancements**
-- [ ] Add multi-user support for racing and competitions.
-- [ ] Implement AI-assisted driving features.
-- [ ] Expand support for additional RC car models.
+- [ ] Develop a charging information system.
 
 ## Project Status
 
