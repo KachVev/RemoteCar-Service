@@ -12,14 +12,15 @@
 
 class WebSocketServerService final : public Module {
 public:
-    using MessageCallback = std::function<void(void* ws, std::string_view message)>;
+    using MessageCallback = std::function<void(std::string_view message)>;
+    using CloseCallback = std::function<void>;
 
     [[nodiscard]] std::string_view name() const override {
         return "WebSocketServerService";
     }
 
     void run() override {
-        serverThread = std::thread([this]() {
+        serverThread = std::thread([this] {
             std::cout << "Starting WebSocket server on port 9001..." << std::endl;
 
             uWS::App().ws<PerSocketData>("/*", {
@@ -28,15 +29,18 @@ public:
                 },
                 .message = [this](auto* ws, const std::string_view message, uWS::OpCode) {
                     std::lock_guard lock(routesMutex);
-                    for (const auto& [path, callback] : routes) {
-                        if (message.starts_with(path)) {
-                            callback(ws, message);
-                            return;
-                        }
+
+                    auto json = nlohmann::json::parse(message);
+                    if (!json.contains("route")) {
+                        std::cerr << "No route specified" << std::endl;
+                        return;
                     }
-                    std::cout << "No handler found for message: " << message << std::endl;
+
+                    if (auto it = routes.find(json["route"]); it != routes.end()) {
+                        it->second(message);
+                    }
                 },
-                .close = [](auto* ws, const int code, const std::string_view message) {
+                .close = [](auto*, const int code, const std::string_view message) {
                     std::cout << "Client disconnected: " << message << " (Code: " << code << ")" << std::endl;
                 }
             }).listen(9001, [](const auto* listen_socket) {
@@ -61,6 +65,7 @@ public:
         std::lock_guard lock(routesMutex);
         routes[path] = std::move(callback);
     }
+
 
 private:
     struct PerSocketData {};

@@ -3,6 +3,9 @@
 #include <iostream>
 #include <ranges>
 #include <vector>
+#include <cctype>
+#include <nlohmann/detail/meta/std_fs.hpp>
+#include <nlohmann/json.hpp>
 
 #include "WebSocketServerService.hpp"
 #include "../entity/Car.hpp"
@@ -32,17 +35,43 @@ public:
 
     void run() override {
         const auto websocket = manager ? manager->getModule<WebSocketServerService>() : nullptr;
-        websocket->registerHandler("/connect", [this](auto *ws, std::string_view message) {
-            // Parse message as json and create car
+        if (!websocket) {
+
+            return;
+        }
+        websocket->registerHandler("/connect", [this](std::string_view message) {
+            try {
+                auto json = nlohmann::json::parse(message);
+
+                const int battery = json["battery"];
+                Car car;
+                car.battery = battery;
+                cars.push_back(car);
+
+
+                std::cout << "New car added with battery: " << battery << std::endl;
+                for (const auto& car : cars) {
+    std::cout << "Car ID: " << car.id
+              << ", Battery: " << car.battery
+              << ", Owner: " << (car.owner ? car.owner->name : "None")
+              << std::endl;
+}
+            } catch (const std::exception& e) {
+                std::cerr << "Failed to parse message: " << e.what() << std::endl;
+            }
         });
 
-        cars.emplace_back();
-        cars.emplace_back();
-        cars.emplace_back();
+        websocket->registerHandler("/dissconnect", [this](std::string_view message) {
 
-        auto person = Person("Name", Person::USER);
-        own_car(&person);
-
+        })
+        //
+        // cars.emplace_back();
+        // cars.emplace_back();
+        // cars.emplace_back();
+        //
+        // auto person = Person("Name", Person::USER);
+        // own_car(&person);
+        //
         for (const auto& car : cars) {
             std::cout << "Car ID: " << car.id
                       << ", Battery: " << car.battery

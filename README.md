@@ -57,7 +57,3 @@ Develop a server for:
 - **Client**: Web/Mobile Application
 - **Communication**: ESP32, WebSockets
 - **Video Streaming**: Direct camera stream from cars
-
-## Contact
-
-For questions or contributions, create an issue in the repository or open a pull request.
