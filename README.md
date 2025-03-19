@@ -38,14 +38,14 @@ Develop a server for:
 ### **Core Features**
 - [ ] Implement user authentication and profile management.
 - [x] Develop the car rental system.
-- [ ] Establish WebSocket communication for real-time control.
+- [X] Establish WebSocket communication for real-time control.
 - [ ] Implement live video streaming from cars.
 - [ ] Design an admin panel for car management(Return data to client for display).
 
 ### **Hardware Integration**
 - [ ] Connect ESP32 to control cars.
 - [ ] Implement battery level monitoring.
-- [ ] Develop a charging information system.
+- [X] Develop a charging information system.
 
 ## Project Status
 
